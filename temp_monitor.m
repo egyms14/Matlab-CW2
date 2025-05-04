@@ -1,5 +1,8 @@
 function temp_monitor(a)
-
+% this function reads temperature from the thermistor and then lights up
+% LEDs according to what range the temperature is within, between 18-24
+% degrees a constant green light will show, anything below this rage will
+% present a blinking yellow light and anything above a blinking red light
 green = 'D2';
 yellow = 'D6';
 red = 'D4';
