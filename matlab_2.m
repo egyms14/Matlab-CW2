@@ -6,7 +6,7 @@
 
 % Insert answers here#
 clear a
-a = arduino('COM3', 'Uno');
+a = arduino();
 for i = 1:10   
     writeDigitalPin(a, 'D8', 1); 
     pause(0.5);                   
@@ -16,7 +16,7 @@ end
 %% TASK 1 - READ TEMPERATURE DATA, PLOT, AND WRITE TO A LOG FILE [20 MARKS]
 % Insert answers here
 clear
-a = arduino('COM3', 'Uno'); 
+a = arduino(); 
 duration = 600;     % 10 minutes
 interval = 1;       % seconds between samples
 samples = duration / interval;
@@ -67,7 +67,9 @@ temp_monitor(a);
 %% TASK 3 - ALGORITHMS – TEMPERATURE PREDICTION [25 MARKS]
 % Insert answers here
 clear
-
+a = arduino();
+doc temp_prediction
+temp_prediction(a);
 
 %% TASK 4 - REFLECTIVE STATEMENT [5 MARKS]
 
