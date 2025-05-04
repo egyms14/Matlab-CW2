@@ -61,6 +61,7 @@ fclose(fid);
 % Insert answers here
 clear
 a  = arduino();
+doc temp_monitor
 temp_monitor(a);
     
 %% TASK 3 - ALGORITHMS – TEMPERATURE PREDICTION [25 MARKS]
