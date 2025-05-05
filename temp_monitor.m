@@ -6,24 +6,25 @@ function temp_monitor(a)
 green = 'D2';
 yellow = 'D6';
 red = 'D4';
-tempPin = 'A1';
+tempPin = 'A1'; %assigns the variable name to where the LEDs and thermistor are connected to on the arduino board
 configurePin(a, green, 'DigitalOutput');
 configurePin(a, yellow, 'DigitalOutput');
 configurePin(a, red, 'DigitalOutput');
 V0 = 0.5;
 TCo = 0.01;
 tempData = [];
-timeData = [];
-figure;
+timeData = [];%creates empty array to store data in
 startTime = datetime('now');
+
+figure;
 
     while true
         V = readVoltage(a, tempPin);
-        TempC = (V - V0) / TCo;
+        TempC = (V - V0) / TCo; %voltage to temp equation
         fprintf('Temperature, %.2f °C\n', TempC);
-        Timenow = datetime('now') - startTime;
-        tempData(end+1) = TempC;
-        timeData(end+1) = seconds(Timenow);
+        Timenow = datetime('now') - startTime; %time that has passed from start
+        tempData(end+1) = TempC; %puts the tempC into the tempData array
+        timeData(end+1) = seconds(Timenow); %converts to seconds
 
         plot(timeData, tempData, '-b');
         xlabel('Time (s)');
@@ -39,17 +40,17 @@ startTime = datetime('now');
         if TempC >= 18 && TempC <= 24
              writeDigitalPin(a, green, 1);
              writeDigitalPin(a, yellow, 0);
-             writeDigitalPin(a, red, 0);
-             pause(1);
+             writeDigitalPin(a, red, 0); % 0 means off and 1 means on
+             pause(1); %1 second pause
 
-        elseif TempC < 18
+        elseif TempC < 18  %this elseif command only used when previosu command is not true
              writeDigitalPin(a, green, 0);
              writeDigitalPin(a, yellow, 1);
              pause(0.5);
              writeDigitalPin(a, yellow, 0);
              pause(0.5);
 
-        else
+        else %also only used when previous command is not true
              writeDigitalPin(a, green, 0);
              writeDigitalPin(a, red, 1);
              pause(0.25);
