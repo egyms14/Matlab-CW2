@@ -22,12 +22,12 @@ while true
        nowTime = seconds(datetime('now') - startTime);
        tempData(end+1) = TempC;
        timeData(end+1) = nowTime;
-       if length(tempData) >= 2
-           n = min(5, length(tempData));
-           dT = tempData(end) - tempData(end - n + 1);
+       if length(tempData) >= 2  %min 2 bits of data so you can actually calculate a rate
+           n = min(5, length(tempData)); %uses last 5 samples
+           dT = tempData(end) - tempData(end - n + 1); %change in temp and change in time
            dt = timeData(end) - timeData(end - n + 1);
-           rateCps = dT / dt;
-           T_future = TempC + rateCps * 300; 
+           rateCps = dT / dt; %C/s
+           T_future = TempC + rateCps * 300; %5 minutes ahead 300 seconds
            fprintf('Temp: %.2f°C Rate: %.4f°C/s Temp in 5 mins: %.2f°C\n', ...
                TempC, rateCps, T_future);
          
